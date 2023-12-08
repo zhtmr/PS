@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Boj_8393 {
+public class Boj_25304 {
 
       static FastReader scan = new FastReader();
       //정답은 sb에 append 를 사용하여 출력
@@ -18,15 +18,29 @@ public class Boj_8393 {
       public static void main(String[] args) {
           input();
       }
-      static void input(){
-          int n = scan.nextInt();
-          int sum = 0;
-          for (int i = 1; i <= n; i++) {
-              sum+=i;
-          }
-          System.out.println(sum);
+      static void input() {
+        int totalPrice = scan.nextInt();
+        int totalAmount = scan.nextInt();
+        int price = 0;
+        int amount = 0;
+        int sum = 0;
+
+        for (int i = 0; i < totalAmount; i++) {
+          price = scan.nextInt();
+          amount = scan.nextInt();
+          sum += price * amount;
+        }
+
+        if (totalPrice == sum) {
+          System.out.println("Yes");
+        } else {
+          System.out.println("No");
+        }
 
       }
+
+
+
       static class FastReader {
           BufferedReader br;
           StringTokenizer st;
@@ -34,7 +48,7 @@ public class Boj_8393 {
               br = new BufferedReader(new InputStreamReader(System.in));
           }
           public FastReader(String s) throws FileNotFoundException {
-              br = new BufferedReader(new FileReader(s));
+              br = new BufferedReader(new FileReader(new File(s)));
           }
           String next() {
               while (st == null || !st.hasMoreElements()) {

@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-public class Boj_10810 {
+public class Boj_10813 {
 
       static FastReader scan = new FastReader();
       //정답은 sb에 append 를 사용하여 출력
@@ -24,21 +24,25 @@ public class Boj_10810 {
       }
       static void input() throws IOException {
           BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
           int n = scan.nextInt();
           int m = scan.nextInt();
-          int[] arr = new int[n];
-
-          for (int index = 0; index < m; index++) {
-              int i = scan.nextInt();
-              int j = scan.nextInt();
-              int k = scan.nextInt();
-              for (int l = i-1; l < j; l++) {
-                  arr[l] = k;
-              }
+          int[] arr = new int[n+1];
+          for (int i = 1; i <= n; i++) {
+              arr[i] = i;
           }
 
-          sb.append(Arrays.stream(arr).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
+          for (int k = 0; k < m; k++) {
+              int i = scan.nextInt();
+              int j = scan.nextInt();
+              int tmp = arr[i];
+              arr[i] = arr[j];
+              arr[j] = tmp;
+          }
+
+          for (int i = 1; i <= n; i++) {
+              sb.append(arr[i]).append(" ");
+          }
+
           bw.write(String.valueOf(sb));
           bw.close();
 

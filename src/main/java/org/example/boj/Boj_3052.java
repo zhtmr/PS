@@ -1,48 +1,48 @@
 package org.example.boj;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 
-public class Boj_10810 {
+public class Boj_3052 {
 
       static FastReader scan = new FastReader();
       //정답은 sb에 append 를 사용하여 출력
       //만약 개행까지 출력하고 싶으면 append('\n')을 추가
       static StringBuilder sb = new StringBuilder();
 
-      public static void main(String[] args) throws IOException {
+      public static void main(String[] args) {
           input();
       }
-      static void input() throws IOException {
-          BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+      static void input(){
+        int[] remainders = new int[10];
+        int count = 0;
 
+        for (int i = 0; i < 10; i++) {
           int n = scan.nextInt();
-          int m = scan.nextInt();
-          int[] arr = new int[n];
+          remainders[i] = n % 42;
+        }
 
-          for (int index = 0; index < m; index++) {
-              int i = scan.nextInt();
-              int j = scan.nextInt();
-              int k = scan.nextInt();
-              for (int l = i-1; l < j; l++) {
-                  arr[l] = k;
-              }
+        for (int i = 0; i < remainders.length; i++) {
+          for (int j = i; j < remainders.length; j++) {
+            if (remainders[i] == remainders[j] && i != j) {
+              count++;
+              break; // 중복된 숫자 제거를 위해 중복된 숫자를 다음 숫자부터 찾아야하므로 반복문 종료.
+            }
           }
+        }
 
-          sb.append(Arrays.stream(arr).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
-          bw.write(String.valueOf(sb));
-          bw.close();
 
+        System.out.println(Arrays.toString(remainders));
+        System.out.println(remainders.length - count);
       }
+
+
       static class FastReader {
           BufferedReader br;
           StringTokenizer st;

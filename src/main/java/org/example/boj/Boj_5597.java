@@ -10,37 +10,31 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 
-public class Boj_10810 {
+public class Boj_5597 {
+
 
       static FastReader scan = new FastReader();
       //정답은 sb에 append 를 사용하여 출력
       //만약 개행까지 출력하고 싶으면 append('\n')을 추가
       static StringBuilder sb = new StringBuilder();
 
-      public static void main(String[] args) throws IOException {
+      public static void main(String[] args) {
           input();
       }
-      static void input() throws IOException {
-          BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
+      static void input(){
+        int[] target = new int[31];
+        target[0] = 1;
+        for (int i = 0; i < 28; i++) {
           int n = scan.nextInt();
-          int m = scan.nextInt();
-          int[] arr = new int[n];
+          target[n] = 1;
+        }
 
-          for (int index = 0; index < m; index++) {
-              int i = scan.nextInt();
-              int j = scan.nextInt();
-              int k = scan.nextInt();
-              for (int l = i-1; l < j; l++) {
-                  arr[l] = k;
-              }
+        for (int i = 0; i < 31; i++) {
+          if (target[i] == 0) {
+            System.out.println(i);
           }
-
-          sb.append(Arrays.stream(arr).mapToObj(String::valueOf).collect(Collectors.joining(" ")));
-          bw.write(String.valueOf(sb));
-          bw.close();
+        }
 
       }
       static class FastReader {
@@ -81,6 +75,7 @@ public class Boj_10810 {
               return str;
           }
       }
+
 
 
 }

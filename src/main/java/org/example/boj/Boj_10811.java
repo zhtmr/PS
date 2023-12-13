@@ -25,28 +25,33 @@ public class Boj_10811 {
         int m = scan.nextInt();
 
         int[] arr = new int[n + 1];
-        int[] tmpArr = new int[arr.length];
 
         for (int k = 1; k <= n; k++) {
           arr[k] = k;
         }
-        System.out.println("원본:       "+Arrays.toString(arr));
+//        System.out.println("원본:       "+Arrays.toString(arr));
 
         for (int z = 0; z < m; z++) {
           int i = scan.nextInt();
           int j = scan.nextInt();
           int T = j-i;
+          int[] tmpArr = new int[arr.length];
+
           for (int c = 0; c <= T; c++, j--, i++) {
             tmpArr[i] = arr[j];
           }
 
-          System.out.println("tmpArr: "+Arrays.toString(tmpArr));
+//          System.out.println("tmpArr: "+Arrays.toString(tmpArr));
           for (int k = 0; k < tmpArr.length; k++) {
-            arr[k] = tmpArr[k];
+            if (tmpArr[k] != 0) {
+              arr[k] = tmpArr[k];
+            }
           }
 
         }
-        System.out.println("결과: "+Arrays.toString(arr));
+//        System.out.println("결과: "+Arrays.toString(arr));
+
+        System.out.println(Arrays.toString(arr).replace("[","").replace("]","").replace(",","").substring(2));
 
 
 

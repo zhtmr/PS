@@ -6,49 +6,30 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Boj_10811 {
+public class Boj_9086 {
 
       static FastReader scan = new FastReader();
+      //정답은 sb에 append 를 사용하여 출력
+      //만약 개행까지 출력하고 싶으면 append('\n')을 추가
       static StringBuilder sb = new StringBuilder();
 
       public static void main(String[] args) {
           input();
       }
       static void input(){
-        int n = scan.nextInt();
-        int m = scan.nextInt();
-
-        int[] arr = new int[n + 1];
-
-        for (int k = 1; k <= n; k++) {
-          arr[k] = k;
-        }
-
-        for (int z = 0; z < m; z++) {
-          int i = scan.nextInt();
-          int j = scan.nextInt();
-          int T = j-i;
-          int[] tmpArr = new int[arr.length];
-
-          for (int c = 0; c <= T; c++, j--, i++) {
-            tmpArr[i] = arr[j];
+          int n = scan.nextInt();
+          String[] arr = new String[n];
+          for(int i = 0; i < n; i++){
+              arr[i] = scan.next();
           }
 
-          for (int k = 0; k < tmpArr.length; k++) {
-            if (tmpArr[k] != 0) {
-              arr[k] = tmpArr[k];
-            }
+          for (int i = 0; i < arr.length; i++) {
+              System.out.println(arr[i].charAt(0) +""+ arr[i].charAt(arr[i].length()-1));
           }
 
-        }
-
-        System.out.println(Arrays.toString(arr).replace("[","").replace("]","").replace(",","").substring(2));
       }
-
       static class FastReader {
           BufferedReader br;
           StringTokenizer st;
@@ -87,4 +68,6 @@ public class Boj_10811 {
               return str;
           }
       }
+
+
 }

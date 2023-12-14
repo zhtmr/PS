@@ -1,54 +1,46 @@
 package org.example.boj;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
-public class Boj_10811 {
+public class Boj_11720 {
 
       static FastReader scan = new FastReader();
+      //정답은 sb에 append 를 사용하여 출력
+      //만약 개행까지 출력하고 싶으면 append('\n')을 추가
       static StringBuilder sb = new StringBuilder();
 
-      public static void main(String[] args) {
+      public static void main(String[] args) throws IOException {
           input();
       }
-      static void input(){
-        int n = scan.nextInt();
-        int m = scan.nextInt();
+      static void input() throws IOException {
+          BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+          int sum = 0;
 
-        int[] arr = new int[n + 1];
+          int n = scan.nextInt();
+          String s = scan.nextLine();
 
-        for (int k = 1; k <= n; k++) {
-          arr[k] = k;
-        }
-
-        for (int z = 0; z < m; z++) {
-          int i = scan.nextInt();
-          int j = scan.nextInt();
-          int T = j-i;
-          int[] tmpArr = new int[arr.length];
-
-          for (int c = 0; c <= T; c++, j--, i++) {
-            tmpArr[i] = arr[j];
+          for (int j = 0; j < n; j++) {
+            sb.append(s.charAt(j));
           }
 
-          for (int k = 0; k < tmpArr.length; k++) {
-            if (tmpArr[k] != 0) {
-              arr[k] = tmpArr[k];
-            }
+          char[] arr = new char[sb.length()];
+          sb.getChars(0, sb.length(), arr, 0);
+
+          for (char c : arr) {
+            sum += c-'0';
           }
-
-        }
-
-        System.out.println(Arrays.toString(arr).replace("[","").replace("]","").replace(",","").substring(2));
+          bw.write(Integer.toString(sum));
+          bw.flush();
+          bw.close();
       }
-
       static class FastReader {
           BufferedReader br;
           StringTokenizer st;
@@ -87,4 +79,6 @@ public class Boj_10811 {
               return str;
           }
       }
+
+
 }

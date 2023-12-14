@@ -19,14 +19,20 @@ public class Boj_2908 {
           input();
       }
       static void input(){
-          int a = scan.nextInt();
-          int b = scan.nextInt();
-          a = Integer.parseInt(sb.append(a).reverse().toString());
+          String a = String.valueOf(scan.nextInt());
+          String b = String.valueOf(scan.nextInt());
+          int ra = reverse(a);
           sb.delete(0, sb.length());
+          int rb = reverse(b);
 
-          b = Integer.parseInt(sb.append(b).reverse().toString());
-          System.out.println(Math.max(a, b));
+          System.out.println(Math.max(ra,rb));
+      }
 
+      static int reverse(String num){
+          for (int i = 0, len = num.length(); i < len; i++) {
+              sb.append(num.charAt(len - i-1));
+          }
+          return Integer.parseInt(String.valueOf(sb));
       }
       static class FastReader {
           BufferedReader br;

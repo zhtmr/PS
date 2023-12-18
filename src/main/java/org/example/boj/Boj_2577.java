@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Boj_10250 {
+public class Boj_2577 {
 
   static FastReader scan = new FastReader();
   //정답은 sb에 append 를 사용하여 출력
@@ -20,15 +20,19 @@ public class Boj_10250 {
   }
 
   static void input() {
-    int t = scan.nextInt();
-    for (int i = 0; i < t; i++) {
-      int h = scan.nextInt();
-      int w = scan.nextInt();
-      int n = scan.nextInt();
-
-      sb.append((n % h == 0) ? h * 100 + n / h : n % h * 100 + n / h + 1).append('\n');
+    int[] arr = new int[10];
+    int a = scan.nextInt();
+    int b = scan.nextInt();
+    int c = scan.nextInt();
+    int mul = a * b * c;
+    while (mul > 0) {
+      arr[mul % 10]++;
+      mul /= 10;
     }
-    System.out.println(sb);
+    for (int i = 0; i < 10; i++) {
+      System.out.println(arr[i]);
+    }
+
   }
 
   static class FastReader {

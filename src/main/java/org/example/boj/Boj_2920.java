@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Boj_10250 {
+public class Boj_2920 {
 
   static FastReader scan = new FastReader();
   //정답은 sb에 append 를 사용하여 출력
@@ -20,15 +20,17 @@ public class Boj_10250 {
   }
 
   static void input() {
-    int t = scan.nextInt();
-    for (int i = 0; i < t; i++) {
-      int h = scan.nextInt();
-      int w = scan.nextInt();
-      int n = scan.nextInt();
-
-      sb.append((n % h == 0) ? h * 100 + n / h : n % h * 100 + n / h + 1).append('\n');
+    String asc = "12345678";
+    String desc = "87654321";
+    String input = scan.nextLine().replace(" ", "");
+    if (asc.equals(input)) {
+      System.out.println("ascending");
+    } else if (desc.equals(input)) {
+      System.out.println("descending");
+    } else {
+      System.out.println("mixed");
     }
-    System.out.println(sb);
+
   }
 
   static class FastReader {

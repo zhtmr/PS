@@ -6,9 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Boj_10250 {
+public class Boj_1157 {
 
   static FastReader scan = new FastReader();
   //정답은 sb에 append 를 사용하여 출력
@@ -20,16 +21,31 @@ public class Boj_10250 {
   }
 
   static void input() {
-    int t = scan.nextInt();
-    for (int i = 0; i < t; i++) {
-      int h = scan.nextInt();
-      int w = scan.nextInt();
-      int n = scan.nextInt();
+    String s = scan.next().toUpperCase();
+    int length = s.length();
+    int[] arr = new int[26];
 
-      sb.append((n % h == 0) ? h * 100 + n / h : n % h * 100 + n / h + 1).append('\n');
+    for (int i = 0; i < length; i++) {
+      char c = s.charAt(i);
+      arr[c - 'A']++;
     }
-    System.out.println(sb);
+
+
+    int max = 0;
+    char result = '?';
+    for (int i = 0; i < arr.length; i++) {
+      if (max < arr[i]) {
+        max = arr[i];
+        result = (char) ('A' + i);
+      } else if (max == arr[i]) {
+        result = '?';
+      }
+    }
+
+    System.out.println(result);
   }
+
+
 
   static class FastReader {
 

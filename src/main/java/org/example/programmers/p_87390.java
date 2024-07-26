@@ -1,10 +1,10 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class p_87390 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +14,31 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
-  }
+    int n = scan.nextInt();
+    long left = scan.nextInt();
+    long right = scan.nextInt();
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+    // 시간초과됨
+    int[][] arr = new int[n][n];
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= n; j++) {
+        arr[i - 1][j - 1] = Math.max(j, i);
+      }
     }
-    return gcd(b, a % b);
+
+    System.out.println(Arrays.deepToString(arr));
+    int[] tmp = new int[arr.length * arr[0].length];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        tmp[arr[i].length * i + j] = arr[i][j];
+      }
+    }
+
+    int[] result = Arrays.copyOfRange(tmp, (int) left, (int) right + 1);
+
+
+    System.out.println(Arrays.toString(result));
+
   }
 
   static class FastReader {

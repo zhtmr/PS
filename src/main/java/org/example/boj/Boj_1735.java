@@ -3,8 +3,7 @@ package org.example.boj;
 import java.io.*;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class Boj_1735 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +13,30 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
+    int Ac = scan.nextInt();
+    int Ap = scan.nextInt();
+    int Bc = scan.nextInt();
+    int Bp = scan.nextInt();
+
+    int gcd = gcd(Ap, Bp);
+    int lcm = Ap * Bp / gcd;
+    int An = Ac * (lcm / Ap);
+    int Bn = Bc * (lcm / Bp);
+    int sumN = An + Bn;
+
+    simplify(sumN, lcm);
   }
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+  private static void simplify(int a, int b) {
+    int gcd = gcd(a, b);
+    System.out.printf("%d %d", a / gcd, b / gcd);
+  }
+
+  private static int gcd(int ap, int bp) {
+    if (bp == 0) {
+      return ap;
     }
-    return gcd(b, a % b);
+    return gcd(bp, ap % bp);
   }
 
   static class FastReader {

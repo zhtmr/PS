@@ -3,8 +3,7 @@ package org.example.boj;
 import java.io.*;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class Boj_4948 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +13,35 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
+    while (true) {
+      int n = scan.nextInt();
+
+      if (n == 0) {
+        break;
+      }
+      System.out.println(primeCnt(n));
+    }
   }
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+  static int primeCnt(int n) {
+    int cnt = 0;
+    boolean[] arr = new boolean[2 * n + 1];
+    arr[0] = arr[1] = true;
+
+    for (int i = 2; i * i <= 2 * n; i++) {
+      if (!arr[i]) {
+        for (int j = i * i; j <= 2 * n; j += i) {
+          arr[j] = true;
+        }
+      }
     }
-    return gcd(b, a % b);
+
+    for (int i = n + 1; i <= 2 * n; i++) {
+      if (!arr[i]) {
+        cnt++;
+      }
+    }
+    return cnt;
   }
 
   static class FastReader {

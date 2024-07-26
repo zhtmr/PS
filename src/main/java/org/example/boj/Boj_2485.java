@@ -1,10 +1,10 @@
 package org.example.boj;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class Boj_2485 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,12 +14,35 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
+    int N = scan.nextInt();
+    int[] list = new int[N];
+    for (int i = 0; i < N; i++) {
+      list[i] = scan.nextInt();
+    }
+
+
+    ArrayList<Integer> subtracts = new ArrayList<>();
+    for (int i = 1; i < list.length; i++) {
+      int x = list[i - 1];
+      int y = list[i];
+      subtracts.add(Math.abs(x - y));
+    }
+
+    int gap = subtracts.get(0);
+    for (int i = 1; i < subtracts.size(); i++) {
+      gap = gcd(gap, subtracts.get(i));
+    }
+
+    int count = 0;
+    for (int i = 0; i < subtracts.size(); i++) {
+      count += (subtracts.get(i) / gap) - 1;
+    }
+
+    System.out.println(count);
+
   }
 
-  private static long gcd(long a, long b) {
+  private static int gcd(int a, int b) {
     if (b == 0) {
       return a;
     }

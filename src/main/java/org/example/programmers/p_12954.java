@@ -1,10 +1,10 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class p_12954 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +14,14 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
-  }
+    int x = scan.nextInt();
+    int n = scan.nextInt();
+    long[] answer = new long[n];
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+    for (int i = 0, j = x; i < n; i++, j+= x) {
+      answer[i] = j;
     }
-    return gcd(b, a % b);
+    System.out.println(Arrays.toString(answer));
   }
 
   static class FastReader {

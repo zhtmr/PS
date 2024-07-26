@@ -1,10 +1,10 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class p_87390_2 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +14,25 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
-  }
+    int n = scan.nextInt();
+    long left = scan.nextInt();
+    long right = scan.nextInt();
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+    // 굳이 배열을 만들고 거기에 값을 담을 필요 없이
+    // 바로 result 배열에 인덱스 범위부터 값 세팅하면된다.
+    int len = (int) (right - left + 1);
+    int[] result = new int[len];
+
+    for (int i = 0; i < len; i++) {
+      long pos = left + i;
+      int row = (int) (pos / n);
+      int col = (int) (pos % n);
+      result[i] = Math.max(row, col) + 1;
     }
-    return gcd(b, a % b);
+
+
+    System.out.println(Arrays.toString(result));
+
   }
 
   static class FastReader {

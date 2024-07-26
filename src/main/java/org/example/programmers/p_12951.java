@@ -1,10 +1,9 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class p_12951 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +13,20 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
-  }
+    String s = scan.nextLine().toLowerCase();
+    String[] split = s.split(" ", -1);
+    StringBuilder result = new StringBuilder();
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+    for (int i = 0; i < split.length; i++) {
+      String string = split[i];
+      if (!string.isEmpty()) {
+        String front = string.substring(0, 1).toUpperCase();
+        result.append(front);
+        result.append(string.substring(1));
+      }
+      result.append(i < split.length - 1 ? " " : "");
     }
-    return gcd(b, a % b);
+    System.out.println(result);
   }
 
   static class FastReader {
@@ -73,3 +76,4 @@ public class Boj_13241 {
   }
 
 }
+

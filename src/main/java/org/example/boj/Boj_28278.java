@@ -1,10 +1,10 @@
 package org.example.boj;
 
 import java.io.*;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class Boj_28278 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +14,60 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
+    int N = scan.nextInt();
+    Stack stack = new Stack();
+    for (int i = 0; i < N; i++) {
+      String[] command = scan.nextLine().split(" ");
+      stack.execute(command);
+    }
+    System.out.println(sb);
   }
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+  static class Stack {
+    private final LinkedList<Integer> stack = new LinkedList<>();
+
+    public void execute(String[] command) {
+      switch (Integer.parseInt(command[0])) {
+        case 1:
+          push(Integer.parseInt(command[1]));
+          break;
+        case 2:
+          sb.append(pop()).append("\n");
+          break;
+        case 5:
+          sb.append(top()).append("\n");
+          break;
+        case 3:
+          sb.append(size()).append("\n");
+          break;
+        case 4:
+          sb.append(empty()).append("\n");
+          break;
+      }
     }
-    return gcd(b, a % b);
+
+    void push(int x) {
+      stack.add(x);
+    }
+
+    int pop() {
+      if (stack.isEmpty()) {
+        return -1;
+      }
+      return stack.removeLast();
+    }
+
+    int size() {
+      return stack.size();
+    }
+
+    int empty() {
+      return stack.isEmpty() ? 1 : 0;
+    }
+
+    int top() {
+      return stack.isEmpty() ? -1 : stack.getLast();
+    }
   }
 
   static class FastReader {

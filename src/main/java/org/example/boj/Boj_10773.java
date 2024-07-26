@@ -1,10 +1,10 @@
 package org.example.boj;
 
 import java.io.*;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class Boj_10773 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +14,21 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
-  }
-
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+    ArrayDeque<Integer> stack = new ArrayDeque<>();
+    int K = scan.nextInt();
+    for (int i = 0; i < K; i++) {
+      int key = scan.nextInt();
+      if (key == 0) {
+        stack.removeLast();
+        continue;
+      }
+      stack.offer(key);
     }
-    return gcd(b, a % b);
+    int sum = 0;
+    for (int e : stack) {
+      sum += e;
+    }
+    System.out.println(sum);
   }
 
   static class FastReader {

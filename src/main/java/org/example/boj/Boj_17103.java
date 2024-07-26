@@ -3,8 +3,7 @@ package org.example.boj;
 import java.io.*;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class Boj_17103 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,17 +13,43 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
+    int T = scan.nextInt();
+    boolean[] primeArr = sieve();
+    for (int i = 0; i < T; i++) {
+      int n = scan.nextInt();
+      goldbachCnt(primeArr, n);
+    }
+    System.out.println(sb);
   }
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
+  static boolean[] sieve() {
+    boolean[] arr = new boolean[1000000 + 1];
+    arr[0] = arr[1] = true;
+
+    for (int i = 2; i * i <= 1000000; i++) {
+      if (!arr[i]) {
+        for (int j = i * i; j <= 1000000; j += i) {
+          arr[j] = true;
+        }
+      }
     }
-    return gcd(b, a % b);
+    return arr;
   }
+
+  private static void goldbachCnt(boolean[] arr, int n) {
+    int count = 0;
+    for (int i = 2; i <= n / 2; i++) {
+      // 인덱스가 확인하려는 숫자고 그 합이 n 이 나와야함
+      // n = i + (n - i), i 가 n / 2 보다 클 수 없다. 그 숫자들이 소수인지 아닌지만 확인하면됨
+      // 둘다 소수여야 골드바흐 통과함
+      if (!arr[i] && !arr[n - i]) {
+        count++;
+      }
+    }
+    sb.append(count).append('\n');
+  }
+
+
 
   static class FastReader {
     BufferedReader br;

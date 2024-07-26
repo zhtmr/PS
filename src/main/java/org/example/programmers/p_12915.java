@@ -1,10 +1,10 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-
-public class Boj_13241 {
+public class p_12915 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,16 +14,41 @@ public class Boj_13241 {
   }
 
   static void input() {
-    long A = scan.nextLong();
-    long B = scan.nextLong();
-    System.out.println(A * B / gcd(A, B));
-  }
+    String[] arr = {"sun", "bed", "car"};
+    String[] arr2 = {"abce", "abcd", "cdx"};
 
-  private static long gcd(long a, long b) {
-    if (b == 0) {
-      return a;
-    }
-    return gcd(b, a % b);
+    int n = 1;
+
+//    for (int i = 0; i < arr.length; i++) {
+//      for (int j = i + 1; j < arr.length; j++) {
+//        char c = arr[i].charAt(n);
+//        char c1 = arr[j].charAt(n);
+//        if (c > c1) {
+//          String tmp = arr[i];
+//          arr[i] = arr[j];
+//          arr[j] = tmp;
+//        } else if (c == c1) {
+//          if (arr[i].compareTo(arr[j]) > 0) {
+//            String tmp = arr[i];
+//            arr[i] = arr[j];
+//            arr[j] = tmp;
+//          }
+//        }
+//      }
+//    }
+
+
+    Arrays.sort(arr, (o1, o2) -> {
+      if (o1.charAt(n) == o2.charAt(n)) {
+        return o1.compareTo(o2);
+      } else {
+        return o1.charAt(n) - o2.charAt(n);
+      }
+    });
+
+
+    System.out.println(Arrays.toString(arr));
+//    System.out.println(Arrays.toString(arr2));
   }
 
   static class FastReader {

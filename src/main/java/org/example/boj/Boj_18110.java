@@ -1,10 +1,9 @@
 package org.example.boj;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Boj_1654 {
+public class Boj_18110 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,24 +13,35 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
+    int n = scan.nextInt();
+    int trimmed = (int) Math.round(n * 0.15);
+
+
+//    System.out.println("trimmed = " + trimmed);
+
+    List<Integer> list = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
       list.add(scan.nextInt());
     }
 
+    Collections.sort(list);
+
+//    System.out.println("prev-list = " + list);
+
+    List<Integer> trimmedList = list.subList(trimmed, n - trimmed);
+
+    //    System.out.println("after-list = " + list);
+
+    int num = trimmedList.size();
     int sum = 0;
-    for (int i : list) {
-      sum += i;
+
+    for (Integer integer : trimmedList) {
+      sum += integer;
     }
 
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
-    }
-    System.out.println(sum2);
+//    System.out.println("sum = " + sum);
+//    System.out.println("num = " + num);
+    System.out.println(Math.round((double) sum / num));
   }
 
   static class FastReader {

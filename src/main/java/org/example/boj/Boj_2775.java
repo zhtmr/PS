@@ -1,10 +1,9 @@
 package org.example.boj;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class Boj_2775 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,29 +13,35 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
-      list.add(scan.nextInt());
+    int[][] dp = new int[15][15];
+    for (int j = 1; j < 15; j++) {
+      dp[0][j] = j;
     }
 
-    int sum = 0;
-    for (int i : list) {
-      sum += i;
+    for (int i = 1; i < 15; i++) {
+      for (int j = 1; j < 15; j++) {
+        if (j == 1) {
+          dp[i][j] = dp[j - 1][j];
+        } else {
+          dp[i][j] = dp[i][j - 1] + dp[i - 1][j];
+        }
+      }
     }
 
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
+    int T = scan.nextInt();
+    for (int i = 0; i < T; i++) {
+      sb.append(dp[scan.nextInt()][scan.nextInt()]).append("\n");
     }
-    System.out.println(sum2);
+
+    System.out.println(sb);
+
+//    System.out.println(Arrays.deepToString(dp));
   }
 
   static class FastReader {
     BufferedReader br;
     StringTokenizer st;
+
 
     public FastReader() {
       br = new BufferedReader(new InputStreamReader(System.in));

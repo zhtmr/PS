@@ -1,10 +1,9 @@
 package org.example.boj;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Boj_1654 {
+public class Boj_7662_2 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,25 +13,49 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
-      list.add(scan.nextInt());
+
+    int T = scan.nextInt();
+    for (int i = 0; i < T; i++) {
+      TreeMap<Integer, Integer> map = new TreeMap<>();
+      int k = scan.nextInt();
+
+      for (int j = 0; j < k; j++) {
+        String command = scan.next();
+        int num = scan.nextInt();
+        if (command.equals("I")) {
+          map.put(num, map.getOrDefault(num, 0) + 1);
+        } else if (command.equals("D")) {
+          if (map.isEmpty()) {
+            continue;
+          }
+          if (num == 1) {
+            Integer max = map.lastKey();
+            if (map.get(max) == 1) {
+              map.remove(max);
+            } else {
+              map.put(max, map.get(max) - 1);
+            }
+          } else {
+            Integer min = map.firstKey();
+            if (map.get(min) == 1) {
+              map.remove(min);
+            } else {
+              map.put(min, map.get(min) - 1);
+            }
+          }
+        }
+      }
+
+      if (map.isEmpty()) {
+        sb.append("EMPTY").append("\n");
+      } else {
+        sb.append(map.lastKey()).append(" ").append(map.firstKey()).append("\n");
+      }
     }
 
-    int sum = 0;
-    for (int i : list) {
-      sum += i;
-    }
-
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
-    }
-    System.out.println(sum2);
+    System.out.println(sb);
   }
+
 
   static class FastReader {
     BufferedReader br;

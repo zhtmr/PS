@@ -1,10 +1,9 @@
 package org.example.boj;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class Boj_15829 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,24 +13,27 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
-      list.add(scan.nextInt());
+
+    int L = scan.nextInt();
+    String s = scan.next();
+
+    System.out.println(hashFun(L, s));
+
+  }
+
+  static int hashFun(int len, String s) {
+    int r = 31;
+    int M = 1234567891;
+    long v = 0;
+    long pow = 1;
+
+    for (int i = 0; i < len; i++) {
+      int val = s.charAt(i) - 'a' + 1;
+      v = (v + val * pow) % M;
+      pow = (pow * r) % M;
     }
 
-    int sum = 0;
-    for (int i : list) {
-      sum += i;
-    }
-
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
-    }
-    System.out.println(sum2);
+    return (int) v;
   }
 
   static class FastReader {

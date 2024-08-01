@@ -1,37 +1,37 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class p_12909 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
 
   public static void main(String[] args) {
-    input();
+    System.out.println(input());
   }
 
-  static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
-      list.add(scan.nextInt());
-    }
+  static boolean input() {
+    String s = "(()(";
+    return extracted(s);
+  }
 
-    int sum = 0;
-    for (int i : list) {
-      sum += i;
+  private static boolean extracted(String s) {
+    char[] charArray = s.toCharArray();
+    ArrayDeque<Character> stack = new ArrayDeque<>();
+    for (char c : charArray) {
+      if (c == '(') {
+        stack.push(c);
+      } else if (c == ')') {
+        if (stack.isEmpty()) {
+          return false;
+        }
+        stack.pop();
+      }
     }
-
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
-    }
-    System.out.println(sum2);
+    return stack.isEmpty();
   }
 
   static class FastReader {

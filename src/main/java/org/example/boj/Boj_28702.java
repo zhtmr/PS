@@ -1,10 +1,9 @@
 package org.example.boj;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class Boj_28702 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,24 +13,49 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
-      list.add(scan.nextInt());
+    String[] arr = new String[3];
+    for (int i = 0; i < 3; i++) {
+      arr[i] = scan.next();
     }
 
-    int sum = 0;
-    for (int i : list) {
-      sum += i;
-    }
+    int[] intArr = new int[3];
 
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
+    for (int i = 0; i < 3; i++) {
+      String string = arr[i];
+      if (!string.equals("FizzBuzz") && !string.equals("Fizz") && !string.equals("Buzz")) {
+        if (i == 2) {
+          intArr[0] = (Integer.parseInt(string) - 2);
+          intArr[1] = (Integer.parseInt(string) - 1);
+          intArr[2] = (Integer.parseInt(string));
+          break;
+        } else if (i == 1) {
+          intArr[0] = (Integer.parseInt(string) - 1);
+          intArr[1] = (Integer.parseInt(string));
+          intArr[2] = (Integer.parseInt(string) + 1);
+          break;
+        } else {
+          intArr[0] = (Integer.parseInt(string));
+          intArr[1] = (Integer.parseInt(string) + 1);
+          intArr[2] = (Integer.parseInt(string) + 2);
+          break;
+        }
+      }
     }
-    System.out.println(sum2);
+    System.out.println(fizzbuzz(intArr[2] + 1));
+
+
+  }
+
+  static String fizzbuzz(int a) {
+
+    if (a % 3 == 0 && a % 5 == 0) {
+      return "FizzBuzz";
+    } else if (a % 3 == 0) {
+      return "Fizz";
+    } else if (a % 5 == 0) {
+      return "Buzz";
+    }
+    return String.valueOf(a);
   }
 
   static class FastReader {

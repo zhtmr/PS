@@ -1,10 +1,10 @@
 package org.example.boj;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class Boj_2346 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,24 +14,37 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
     int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
-      list.add(scan.nextInt());
+    ArrayDeque<int[]> deque = new ArrayDeque<>();
+    for (int i = 1; i <= N; i++) {
+      deque.offer(new int[] {i, scan.nextInt()});
     }
 
-    int sum = 0;
-    for (int i : list) {
-      sum += i;
+
+    while (!deque.isEmpty()) {
+      int[] current = deque.pollFirst();
+      int idx = current[0];
+      int move = current[1];
+
+      sb.append(idx).append(" ");
+
+      if (deque.isEmpty()) {
+        break;
+      }
+
+      if (move > 0) {
+        for (int i = 0; i < move - 1; i++) {
+          deque.offerLast(deque.pollFirst());
+        }
+      } else {
+        for (int i = 0; i < Math.abs(move); i++) {
+          deque.offerFirst(deque.pollLast());
+        }
+      }
     }
 
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
-    }
-    System.out.println(sum2);
+    System.out.println(sb);
+
   }
 
   static class FastReader {

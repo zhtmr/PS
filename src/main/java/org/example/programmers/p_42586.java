@@ -1,10 +1,9 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Boj_1654 {
+public class p_42586 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,24 +13,46 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
-      list.add(scan.nextInt());
+    int[] prog1 = {93, 30, 55};
+    int[] prog = {95, 90, 99, 99, 80, 99};
+
+    int[] speed1 = {1, 30, 5};
+    int[] speed = {1, 1, 1, 1, 1, 1, 1};
+
+
+    List<Integer> days = new ArrayList<>();
+    for (int i = 0; i < prog.length; i++) {
+      int v = (int) Math.ceil((100 - (double) prog[i]) / (double) speed[i]);
+      days.add(v);
     }
 
-    int sum = 0;
-    for (int i : list) {
-      sum += i;
+    System.out.println("days = " + days);
+
+    ArrayList<Integer> result = new ArrayList<>();
+    int count = 1;
+    int prev = days.get(0);
+
+    for (int i = 1; i < days.size(); i++) {
+      if (prev >= days.get(i)) {
+        count++;
+      } else {
+        result.add(count);
+        count = 1;
+        prev = days.get(i);
+      }
+    }
+    result.add(count);
+
+    System.out.println("result = " + result);
+
+
+
+    int[] answer = new int[result.size()];
+    for (int i = 0; i < answer.length; i++) {
+      answer[i] = result.get(i);
     }
 
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
-    }
-    System.out.println(sum2);
+    System.out.println(Arrays.toString(answer));
   }
 
   static class FastReader {

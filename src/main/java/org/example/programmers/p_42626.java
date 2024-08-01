@@ -1,10 +1,10 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class p_42626 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -14,25 +14,36 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    ArrayList<Integer> list = new ArrayList<>();
-    for (int i = 0; i < K; i++) {
-      list.add(scan.nextInt());
+    int[] scoville = {9, 1, 2, 3, 10, 12};
+    int K = 7;
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    for (int j : scoville) {
+      minHeap.add(j);
     }
 
-    int sum = 0;
-    for (int i : list) {
-      sum += i;
-    }
-
-    System.out.println(sum / N);
-    int sum2 = 0;
-    for (int i = 0; i < list.size(); i++) {
-      sum2 += list.get(i) / 231;
-    }
-    System.out.println(sum2);
+    Integer count = getInteger(minHeap, K);
+    System.out.println(count);
   }
+
+  private static Integer getInteger(PriorityQueue<Integer> minHeap, int K) {
+    int count = 0;
+
+    while (minHeap.peek() < K) {
+      if (minHeap.size() <= 1) {
+        count = -1;
+        break;
+      }
+      Integer firstMin = minHeap.poll();
+      Integer secondMin = minHeap.poll();
+      int newScoville = firstMin + (secondMin * 2);
+      minHeap.add(newScoville);
+      count++;
+
+    }
+    return count;
+  }
+
+
 
   static class FastReader {
     BufferedReader br;

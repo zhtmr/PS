@@ -3,7 +3,7 @@ package org.example.boj;
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class Boj_15439 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -13,41 +13,9 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
     int N = scan.nextInt();
-    int[] arr = new int[K];
-
-    int max = 0;
-    for (int i = 0; i < K; i++) {
-      arr[i] = scan.nextInt();
-      if (arr[i] > max) {
-        max = arr[i];
-      }
-    }
-
-
-    long start = 1;
-    long end = max;
-
-    long result = 0;
-    while (start <= end) {
-      long mid = (start + end) / 2;
-
-      long count = 0;
-      for (int i = 0; i < K; i++) {
-        count += arr[i] / mid;
-      }
-      if (count >= N) {
-        result = mid;
-        start = mid + 1;
-      } else {
-        end = mid - 1;
-      }
-    }
-
-    System.out.println(result);
+    System.out.println(N * (N - 1));
   }
-
 
   static class FastReader {
     BufferedReader br;

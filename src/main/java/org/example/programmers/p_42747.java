@@ -1,9 +1,11 @@
-package org.example.boj;
+package org.example.programmers;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class p_42747 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -13,39 +15,20 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    int[] arr = new int[K];
-
-    int max = 0;
-    for (int i = 0; i < K; i++) {
-      arr[i] = scan.nextInt();
-      if (arr[i] > max) {
-        max = arr[i];
-      }
-    }
-
-
-    long start = 1;
-    long end = max;
-
-    long result = 0;
-    while (start <= end) {
-      long mid = (start + end) / 2;
-
-      long count = 0;
-      for (int i = 0; i < K; i++) {
-        count += arr[i] / mid;
-      }
-      if (count >= N) {
-        result = mid;
-        start = mid + 1;
+    int[] citations = new int[] {3, 0, 6, 1, 5};
+    Integer[] array = Arrays.stream(citations).boxed().toArray(Integer[]::new);
+    Arrays.sort(array, Collections.reverseOrder());
+    int h = 0;
+    for (int i = 0; i < array.length; i++) {
+      if (array[i] >= i + 1) {
+        h = i + 1;
       } else {
-        end = mid - 1;
+        break;
       }
     }
 
-    System.out.println(result);
+    System.out.println(h);
+
   }
 
 

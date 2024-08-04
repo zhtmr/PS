@@ -1,53 +1,67 @@
 package org.example.boj;
 
 import java.io.*;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class Boj_1966 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
 
   public static void main(String[] args) {
     input();
+    System.out.println(sb);
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    int[] arr = new int[K];
+    int T = scan.nextInt();
 
-    int max = 0;
-    for (int i = 0; i < K; i++) {
-      arr[i] = scan.nextInt();
-      if (arr[i] > max) {
-        max = arr[i];
+    for (int i = 0; i < T; i++) {
+      int N = scan.nextInt();
+      int M = scan.nextInt();
+      ArrayDeque<Node> queue = new ArrayDeque<>();
+      for (int j = 0; j < N; j++) {
+        queue.offer(new Node(scan.nextInt(), j));
       }
+
+      int count = 0;
+      while (!queue.isEmpty()) {
+        Node current = queue.poll();
+        if (check(queue, current)) {
+          queue.offerLast(current);
+        } else {
+          count++;
+          if (current.idx == M) {
+            break;
+          }
+        }
+      }
+
+      sb.append(count).append("\n");
     }
 
-
-    long start = 1;
-    long end = max;
-
-    long result = 0;
-    while (start <= end) {
-      long mid = (start + end) / 2;
-
-      long count = 0;
-      for (int i = 0; i < K; i++) {
-        count += arr[i] / mid;
-      }
-      if (count >= N) {
-        result = mid;
-        start = mid + 1;
-      } else {
-        end = mid - 1;
-      }
-    }
-
-    System.out.println(result);
   }
 
+  private static boolean check(ArrayDeque<Node> q, Node current) {
+    for (Node node : q) {
+      if (node.value > current.value) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static class Node {
+    int value;
+    int idx;
+
+    Node(int value, int idx) {
+      this.value = value;
+      this.idx = idx;
+    }
+
+  }
 
   static class FastReader {
     BufferedReader br;

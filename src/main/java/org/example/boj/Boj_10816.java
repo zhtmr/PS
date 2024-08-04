@@ -20,6 +20,7 @@ public class Boj_10816 {
       int key = scan.nextInt();
       map.put(key, map.getOrDefault(key, 0) + 1);
     }
+    System.out.println("map = " + map);
     int M = scan.nextInt();
     for (int i = 0; i < M; i++) {
       sb.append(map.getOrDefault(scan.nextInt(), 0)).append(" ");

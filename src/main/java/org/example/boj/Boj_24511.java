@@ -1,9 +1,10 @@
 package org.example.boj;
 
 import java.io.*;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class Boj_24511 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -13,41 +14,32 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
+    ArrayDeque<Integer> queue = new ArrayDeque<>();
+
     int N = scan.nextInt();
-    int[] arr = new int[K];
+    int[] flag = new int[N];
 
-    int max = 0;
-    for (int i = 0; i < K; i++) {
-      arr[i] = scan.nextInt();
-      if (arr[i] > max) {
-        max = arr[i];
+    for (int i = 0; i < N; i++) {
+      flag[i] = scan.nextInt();
+    }
+
+    for (int i = 0; i < N; i++) {
+      int e = scan.nextInt();
+      if (flag[i] == 0) {
+        queue.offerFirst(e);
       }
     }
 
 
-    long start = 1;
-    long end = max;
-
-    long result = 0;
-    while (start <= end) {
-      long mid = (start + end) / 2;
-
-      long count = 0;
-      for (int i = 0; i < K; i++) {
-        count += arr[i] / mid;
-      }
-      if (count >= N) {
-        result = mid;
-        start = mid + 1;
-      } else {
-        end = mid - 1;
-      }
+    int M = scan.nextInt();
+    for (int i = 0; i < M; i++) {
+      queue.offer(scan.nextInt());
+      sb.append(queue.poll()).append(" ");
     }
 
-    System.out.println(result);
+    System.out.println(sb);
+
   }
-
 
   static class FastReader {
     BufferedReader br;

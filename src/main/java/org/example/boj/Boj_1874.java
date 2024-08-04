@@ -1,9 +1,10 @@
 package org.example.boj;
 
 import java.io.*;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class Boj_1654 {
+public class Boj_1874 {
 
   static FastReader scan = new FastReader();
   static StringBuilder sb = new StringBuilder();
@@ -13,39 +14,37 @@ public class Boj_1654 {
   }
 
   static void input() {
-    int K = scan.nextInt();
-    int N = scan.nextInt();
-    int[] arr = new int[K];
-
-    int max = 0;
-    for (int i = 0; i < K; i++) {
-      arr[i] = scan.nextInt();
-      if (arr[i] > max) {
-        max = arr[i];
-      }
+    int n = scan.nextInt();
+    int[] nums = new int[n];
+    for (int i = 0; i < n; i++) {
+      nums[i] = scan.nextInt();
     }
 
 
-    long start = 1;
-    long end = max;
-
-    long result = 0;
-    while (start <= end) {
-      long mid = (start + end) / 2;
-
-      long count = 0;
-      for (int i = 0; i < K; i++) {
-        count += arr[i] / mid;
+    ArrayDeque<Integer> stack = new ArrayDeque<>();
+    int current = 1;
+    boolean possible = true;
+    for (int num : nums) {
+      while (current <= num) {
+        stack.push(current);
+        sb.append("+\n");
+        current++;
       }
-      if (count >= N) {
-        result = mid;
-        start = mid + 1;
+
+      if (stack.peek() == num) {
+        stack.pop();
+        sb.append("-\n");
       } else {
-        end = mid - 1;
+        possible = false;
+        break;
       }
     }
 
-    System.out.println(result);
+    if (possible) {
+      System.out.println(sb);
+    } else {
+      System.out.println("NO");
+    }
   }
 
 

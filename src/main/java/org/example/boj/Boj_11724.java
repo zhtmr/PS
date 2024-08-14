@@ -34,7 +34,6 @@ public class Boj_11724 {
         dfs(i);
         count++;
       }
-
     }
 
     System.out.println(count);

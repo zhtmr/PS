@@ -3,6 +3,7 @@ package org.example.boj;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Boj_1012 {
@@ -32,6 +33,8 @@ public class Boj_1012 {
 
         graph[x][y] = true;
       }
+
+      System.out.println("graph = " + Arrays.deepToString(graph));
 
       int count = 0;
       for (int x = 0; x < M; x++) {

@@ -23,6 +23,7 @@ public class Boj_18870 {
     int[] clone = arr.clone();
     Arrays.sort(clone);
 
+    // -10 -9 2 4 4
     int[] sortArr = Arrays.stream(clone).distinct().toArray();
     int[] result = new int[N];
     for (int i = 0; i < N; i++) {
